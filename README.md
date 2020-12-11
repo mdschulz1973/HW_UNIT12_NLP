@@ -1,95 +1,88 @@
-# Unit 11—Risky Business
+# Unit 12—Tales from the Crypto
 
-![Credit Risk](Images/credit-risk.jpg)
+![Stock Sentiment](Images/sentimental.jpeg)
 
 ## Background
 
-Auto loans, mortgages, student loans, debt consolidation ... these are just a few examples of credit and loans that people are seeking online. Peer-to-peer lending services such as LendingClub or Prosper allow investors to loan other people money without the use of a bank. However, investors always want to mitigate risk, so you have been asked by a client to help them use machine learning techniques to predict credit risk.
+There's been a lot of hype in the news lately about cryptocurrency, so you want to take stock, so to speak, of the latest news headlines regarding Bitcoin and Ethereum to get a better feel for the current public sentiment around each coin.
 
-In this assignment, you will build and evaluate several machine-learning models to predict credit risk using free data from LendingClub. Credit risk is an inherently imbalanced classification problem (the number of good loans is much larger than the number of at-risk loans), so you will need to employ different techniques for training and evaluating models with imbalanced classes. You will use the imbalanced-learn and Scikit-learn libraries to build and evaluate models using the two following techniques:
+In this assignment, you will apply natural language processing to understand the sentiment in the latest news articles featuring Bitcoin and Ethereum. You will also apply fundamental NLP techniques to better understand the other factors involved with the coin prices such as common words and phrases and organizations and entities mentioned in the articles.
 
-1. [Resampling](#Resampling)
-2. [Ensemble Learning](#Ensemble-Learning)
+Complete the following tasks:
+
+1. [Sentiment Analysis](#Sentiment-Analysis)
+2. [Natural Language Processing](#Natural-Language-Processing)
+3. [Named Entity Recognition](#Named-Entity-Recognition)
 
 ---
 
 ### Files
 
-[Resampling Starter Notebook](Starter_Code/credit_risk_resampling.ipynb)
-
-[Ensemble Starter Notebook](Starter_Code/credit_risk_ensemble.ipynb)
-
-[Lending Club Loans Data](Instructions/Resources/LoanStats_2019Q1.csv.zip)
+[Starter Notebook](Starter_Code/crypto_sentiment.ipynb)
 
 ---
 
 ### Instructions
 
-#### Resampling
+#### Sentiment Analysis
 
-You will use the [imbalanced learn](https://imbalanced-learn.readthedocs.io) library to resample the LendingClub data and build and evaluate logistic regression classifiers using the resampled data.
+Use the [newsapi](https://newsapi.org/) to pull the latest news articles for Bitcoin and Ethereum and create a DataFrame of sentiment scores for each coin.
 
-You will:
+Use descriptive statistics to answer the following questions:
 
-1. Load the Lending Club data, split the data into training and testing sets, and scale the features data.
-2. Oversample the data using the `Naive Random Oversampler` and `SMOTE` algorithms.
-3. Undersample the data using the `Cluster Centroids` algorithm.
-4. Over- and under-sample using a combination `SMOTEENN` algorithm.
-
-For each of the above, you will need to:
-
-1. Train a `logistic regression classifier` from `sklearn.linear_model` using the resampled data.
-2. Calculate the `balanced accuracy score` from `sklearn.metrics`.
-3. Calculate the `confusion matrix` from `sklearn.metrics`.
-4. Print the `imbalanced classification report` from `imblearn.metrics`.
-
-Use the above to answer the following:
-
-> Which model had the best balanced accuracy score?
+> Which coin had the highest mean positive score?
 >
-> Which model had the best recall score?
+> Which coin had the highest negative score?
 >
-> Which model had the best geometric mean score?
+> Which coin had the highest positive score?
 
-#### Ensemble Learning
+#### Natural Language Processing
 
-In this section, you will train and compare two different ensemble classifiers to predict loan risk and evaluate each model. You will use the [Balanced Random Forest Classifier](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.ensemble.BalancedRandomForestClassifier.html#imblearn-ensemble-balancedrandomforestclassifier) and the [Easy Ensemble Classifier](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.ensemble.EasyEnsembleClassifier.html#imblearn-ensemble-easyensembleclassifier). Refer to the documentation for each of these to read about the models and see examples of the code.
+In this section, you will use NLTK and Python to tokenize the text for each coin. Be sure to:
 
-Be sure to complete the following steps for each model:
+1. Lowercase each word
+2. Remove punctuation
+3. Remove stop words
 
-1. Load the Lending Club data, split the data into training and testing sets, and scale the features data.
-2. Train the model using the quarterly data from LendingClub provided in the `Resource` folder.
-3. Calculate the balanced accuracy score from `sklearn.metrics`.
-4. Print the confusion matrix from `sklearn.metrics`.
-5. Generate a classification report using the `imbalanced_classification_report` from imbalanced learn.
-6. For the balanced random forest classifier only, print the feature importance sorted in descending order (most important feature to least important) along with the feature score.
+Next, look at the ngrams and word frequency for each coin.
 
-Use the above to answer the following:
+1. Use NLTK to produce the ngrams for N = 2.
+2. List the top 10 words for each coin.
 
-> Which model had the best balanced accuracy score?
->
-> Which model had the best recall score?
->
-> Which model had the best geometric mean score?
->
-> What are the top three features?
+Finally, generate word clouds for each coin to summarize the news for each coin.
+
+![btc-word-cloud.png](Images/btc-word-cloud.png)
+
+![eth-word-cloud.png](Images/eth-word-cloud.png)
+
+#### Named Entity Recognition
+
+In this section, you will build a named entity recognition model for both coins and visualize the tags using SpaCy.
+
+![btc-ner.png](Images/btc-ner.png)
+
+![eth-ner.png](Images/eth-ner.png)
+
+---
+
+### Resources
+
+[Vader Sentiment Analysis](http://www.nltk.org/howto/sentiment.html)
 
 ---
 
 ### Hints and Considerations
 
-Use the quarterly data from the LendingClub data that is provided in the `Resources` folder. Keep the file in the zipped format and use the starter code to read the file.
-
-Refer to the [imbalanced-learn](https://imbalanced-learn.readthedocs.io/en/stable/) and [scikit-learn](https://scikit-learn.org/stable/) official documentation for help with training the models. Remember that these models all use the model->fit->predict API.
-
-For the ensemble learners, use 100 estimators for both models.
+The free developer version of the News API limits the total monthly requests, so be careful not to exceed the free limits.
 
 ---
 
 ### Submission
 
-* Create Jupyter notebooks for the homework and host the notebooks on GitHub.
-* Include a markdown that summarizes your homework and include this report in your GitHub repository.
+* Create Jupyter Notebooks for the NLP analysis and host the notebooks on GitHub.
+
+* Include a Markdown that summarizes your homework and include this report in your GitHub repo.
+
 * Submit the link to your GitHub project to Bootcamp Spot.
 
 ---
